@@ -1,0 +1,72 @@
+<template>
+    <div class="slds-form-element slds-form-element_stacked">
+        <label class="slds-form-element__label" for="input-date">
+            {label}
+        </label>
+        <div class="slds-form-element__control">
+            <div class="slds-input-has-icon slds-input-has-icon_right">
+                <div class="slds-combobox_container slds-has-inline-listbox zero-border-width">
+                    <lightning-icon class="slds-icon slds-input__icon slds-input__icon_right slds-icon-text-default"
+                        icon-name="utility:date_input" size="x-small">
+                    </lightning-icon>
+
+                    <input id="input-date" class="slds-input" type="text" 
+                        placeholder={placeholder} disabled={disabled}
+                        value={getInputValue} onclick={handleClick}
+                        onblur={handleBlur} onfocus={handleFocus} oninput={handleInput} />
+                </div>
+            </div>
+
+            <template if:true={hasError}>
+                <label role="alert"
+                    class="slds-form-element__label slds-var-m-top_xx-small slds-var-p-left_x-small form-error">{errorMessage}</label>
+            </template>
+
+            <div if:true={isDatePickerInitialized}
+                class="dates slds-dropdown slds-p-top_small"
+                onmouseenter={handleMouseEnter}
+                onmouseleave={handleMouseLeave}
+                role="presentation">
+                <div class="buttonContainer">
+                    <button class="slds-button slds-button_neutral zero-border-width"
+                        onclick={previousMonth} >
+                        <svg class="slds-button__icon" aria-hidden="true">
+                            <use
+                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevronleft">
+                            </use>
+                        </svg>
+                    </button>
+
+                    <span class="bold-month">{month}</span>
+                    <span class="bold-year">{year}</span>
+
+                    <button class="slds-button slds-button_neutral zero-border-width"
+                        onclick={nextMonth} >
+                        <svg class="slds-button__icon" aria-hidden="true">
+                            <use
+                                xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#chevronright">
+                            </use>
+                        </svg>
+                    </button>
+                </div>
+                <ul class="header">
+                    <li>D</li>
+                    <li>S</li>
+                    <li>T</li>
+                    <li>Q</li>
+                    <li>Q</li>
+                    <li>S</li>
+                    <li>S</li>
+                </ul>
+                <ul class="datePickerHolder">
+                    <template for:each={dates} for:item="date">
+                        <li key={date.formatted}
+                            class={date.className}
+                            data-date={date.formatted}
+                            onclick={setSelected} > {date.text} </li>
+                    </template>
+                </ul>
+            </div>
+        </div>
+    </div>
+</template>

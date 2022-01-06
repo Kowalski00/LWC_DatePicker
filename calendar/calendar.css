@@ -1,0 +1,136 @@
+@media only screen and (max-width: 540px) {
+    .parent-div {
+      text-align: center;
+    }
+    .dates {
+      display: inline-block;
+      width: 225px;
+      border: 0.5px solid gray;
+      border-radius: 16px;
+  
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 9999;
+  
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      -moz-transform: translateX(-50%) translateY(-50%);
+      -ms-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+    }
+  
+    .dates ul {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 225px;
+      margin: 0 auto;
+    }
+  
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3px;
+    }
+  
+    .buttonContainer {
+      margin: 4px auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none;
+    }
+  }
+  
+  .bold-month {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .bold-year {
+    font-size: 10px;
+    font-weight: 600;
+  }
+  
+  .link {
+    color: #007bff;
+    border: 0;
+  }
+  .dates {
+    width: 325px;
+    border: 0.5px solid gray;
+    border-radius: 16px;
+    margin: 0 auto;
+  }
+  
+  .dates ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 300px;
+    margin: 0 auto;
+  }
+  
+  .dates .datePickerHolder {
+    flex-wrap: wrap;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 35px;
+    min-height: 35px;
+    margin: 3px;
+  }
+  
+  .buttonContainer {
+    width: 264px;
+    margin: 8px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+  }
+  
+  .datePickerHolder li {
+    color: black;
+    cursor: pointer;
+    border-radius: 32px;
+  }
+  
+  .header li {
+    background-color: white;
+    color: black;
+    font-weight: 600;
+  }
+  
+  .datePickerHolder li:hover {
+    background-color: #5c95ff;
+  }
+  
+  .datePickerHolder .padder {
+    color: gray;
+  }
+  
+  .datePickerHolder .valid {
+    background-color: #6fff5c;
+  }
+  
+  .datePickerHolder .selected {
+    background-color: pink;
+  }
+  
+  .datePickerHolder .invalid {
+    background-color: #ff5c5c;
+  }
+  
+  .zero-border-width {
+    border-width: 0px;
+  }
+  
+  .form-error {
+    color: rgb(194, 57, 52);
+    display: block;
+  }
