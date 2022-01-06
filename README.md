@@ -1,4 +1,4 @@
-# Nome do projeto
+# LWC DatePicker
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
@@ -21,7 +21,7 @@ Project on development with these features to be worked on:
 ## How to use
 
 On your parent component html you can add the calendar following the example:
-'''
+```
 <div class="slds-form-element slds-form-element_stacked">
 	<c-calendar
 		name="FIELD_NAME"
@@ -31,4 +31,4 @@ On your parent component html you can add the calendar following the example:
 		>
 	</c-calendar>
 </div>
-'''
+```
