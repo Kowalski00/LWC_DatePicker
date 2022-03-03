@@ -38,3 +38,34 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+
+# Ignore these
+.eslintignore
+
+.husky/pre-commit
+
+.prettierignore
+
+.prettierrc
+
+.vscode/extensions.json
+
+.vscode/launch.json
+
+.vscode/settings.json
+
+config/project-scratch-def.json
+
+force-app/main/default/aura/.eslintrc.json
+
+force-app/main/default/lwc/.eslintrc.json
+
+jest.config.js
+
+package.json
+
+scripts/apex/hello.apex
+
+scripts/soql/account.soql
+
+sfdx-project.json
