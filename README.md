@@ -9,7 +9,7 @@
 
 This calendar allows to set and visually shows a minimal date for selection.
 
-![datepicker](https://user-images.githubusercontent.com/34189031/153301525-ff27423f-652f-4e7b-8929-ea3557a7595e.jpg)
+![datepicker](https://user-images.githubusercontent.com/34189031/182730365-dac20dac-b9b3-49d2-9721-6b4a7ce0d1c7.png)
 
 ### Features
 
