@@ -3,13 +3,16 @@
 
     <div class="main">
         <div class="slds-grid slds-wrap slds-m-horizontal_small">
+            <lightning-input type="date" name="input1" label="Enter a minimum date" value={minDate}></lightning-input>
             <div class="slds-box">
                 <c-calendar
                     name="test"
-                    value={}
-                    min={}>
+                    value={dateContext}
+                    min={minDate}
+                    onselectionchange={handleChangeDate}>
                 </c-calendar>
-            </div>            
+            </div>   
+            <lightning-input type="date" name="input1" label="Date Selected:" value={dateSelected} readonly></lightning-input>         
         </div>
     </div>
     
