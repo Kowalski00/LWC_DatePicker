@@ -2,6 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 import { NavigationMixin } from 'lightning/navigation';
 
 const today = new Date();
+const ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
 
 const REGEX = /^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](\d{4})$/;
 
@@ -173,51 +174,49 @@ export default class Calendar extends NavigationMixin(LightningElement) {
 
     refreshDateNodes() {
         this.dates = [];
-        var ONE_WEEK = 1000 * 60 * 60 * 24 * 7;
 
         const currentDate = new Date(this.dateContext);
         const startMonth = new Date(this.dateContext).setDate(1);
-        let dateLastDayOfMonth = new Date(currentDate.getFullYear(),currentDate.getMonth() + 1, 0);
-        const numWeeks = Math.round( ( (dateLastDayOfMonth - startMonth) / ONE_WEEK) + 1);
+        const dateLastDayOfMonth = new Date(currentDate.getFullYear(),currentDate.getMonth() + 1, 0);
+        const numberWeeks = Math.round( ( (dateLastDayOfMonth - startMonth) / ONE_WEEK) + 1);
 
-        for (let week = 0; week <= numWeeks; week++) {
-            Array(7)
-                .fill(0)
-                .forEach((element, i) => {
+        let firstSunday = new Date(this.getSundayOfWeek( startMonth ));
 
-                    let day = new Date(this.dateContext);
-                    day = new Date(this.getSundayOfWeek( day.setDate(1) ));
-                    day.setDate( day.getDate() + (( 7 * week ) + i));
+        for (let week = 0; week <= numberWeeks; week++) {
 
-                    let className = '';
+            Array(7).fill(0).forEach((element, i) => {
 
-                    if (day.getMonth() === this.dateContext.getMonth()) {
-                        if (day === today) {
-                            className = 'today';
-                        }
-                        else if(day < this.minDate){
-                            className = 'invalid';
-                        } else {
-                            className = 'valid';
-                        }
-                    } else {
-                        className = 'padder';
+                let className = '';
+                let day = new Date(firstSunday);
+                day.setDate( day.getDate() + (( 7 * week ) + i));
+
+                if (day.getMonth() === this.dateContext.getMonth()) {
+                    if (day === today) {
+                        className = 'today';
                     }
+                    else if(day < this.minDate){
+                        className = 'invalid';
+                    } else {
+                        className = 'valid';
+                    }
+                } else {
+                    className = 'padder';
+                }
 
-                    this.dates.push({
-                        className,
-                        formatted: day.toLocaleDateString('en-US'),
-                        text: String(day.getDate())
-                    });
+                this.dates.push({
+                    className,
+                    formatted: day.toLocaleDateString('en-US'),
+                    text: String(day.getDate())
                 });
+            });
         }
     }
 
-    getSundayOfWeek(d){
-        d = new Date(d);
-        var day = d.getDay(),
-            diff = d.getDate() - day ; 
-        return new Date(d.setDate(diff));
+    getSundayOfWeek(firstDay){
+        firstDay = new Date(firstDay);
+        var day = firstDay.getDay(),
+            diff = firstDay.getDate() - day ; 
+        return new Date(firstDay.setDate(diff));
     }
 
     previousMonth() {
@@ -243,21 +242,22 @@ export default class Calendar extends NavigationMixin(LightningElement) {
 
     get getInputValue() {
 
-        if(!this.selectedDate || this.selectedDate === '')
-            return '';
+        if(!this.selectedDate || this.selectedDate === '') return '';
 
         return this.formatDate(this.selectedDate);
     }
 
     get formattedSelectedDate() {
-        if(!this.selectedDate || this.selectedDate === '')
-            return;
+
+        if(!this.selectedDate || this.selectedDate === '') return;
 
         return this.formatDate(this.selectedDate);
     }
+
     get year() {
         return this.dateContext.getFullYear();
     }
+
     get month() {
         return this._months[ this.dateContext.getMonth() ];
     }
