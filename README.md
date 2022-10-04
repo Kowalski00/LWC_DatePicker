@@ -16,8 +16,7 @@ This calendar allows to set and visually shows a minimal date for selection.
 Project on development with these features to be worked on:
 
 - [x] Visual adjusts for min dates
-- [ ] Set and visual adjusts for max dates
-- [ ] Option to select language of months and days
+- [x] Set and visual adjusts for max dates
 - [ ] Today Button
 - [ ] List selection for Year
 
