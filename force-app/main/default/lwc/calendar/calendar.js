@@ -15,10 +15,10 @@ export default class Calendar extends NavigationMixin(LightningElement) {
     @api label = '';
     @api placeholder = '';
     @api required = false;
-    @api maxDate;
     @api name;
 
     minDate;
+    maxDate;
     lastClass; 
     isDatePickerInitialized;
     hasError = true;
@@ -60,6 +60,15 @@ export default class Calendar extends NavigationMixin(LightningElement) {
     
     set min(value){
         this.minDate = new Date(value);
+    }
+
+    @api
+    get max(){
+        return this.maxDate;
+    }
+    
+    set max(value){
+        this.maxDate = new Date(value);
     }
 
     connectedCallback() {
@@ -153,23 +162,17 @@ export default class Calendar extends NavigationMixin(LightningElement) {
             dateSelected = new Date(splitDate[2],splitDate[1]-1,splitDate[0]);
         }
 
-        if(dateSelected >= this.minDate){
+        if((dateSelected >= this.minDate && dateSelected <= this.maxDate) || (!this.minDate || !this.maxDate)){
             this.selectedDate = dateSelected;
             this.dateContext = dateSelected;
             this.lastClass = event.target.className;
             event.target.className = 'selected';
             this.isDatePickerInitialized = false;
-        }
 
-        if(!this.minDate){
-            this.selectedDate = dateSelected;
-            this.dateContext = dateSelected;
-            this.lastClass = event.target.className;
-            event.target.className = 'selected';
-            this.isDatePickerInitialized = false;
-        }
 
-        this.dispatchEvent(new CustomEvent('selectionchange', { detail: dateSelected }));
+            this.dispatchEvent(new CustomEvent('selectionchange', { detail: this.selectedDate }));
+
+        }
     }
 
     refreshDateNodes() {
@@ -194,7 +197,7 @@ export default class Calendar extends NavigationMixin(LightningElement) {
                     if (day === today) {
                         className = 'today';
                     }
-                    else if(day < this.minDate){
+                    else if(day < this.minDate || day > this.maxDate){
                         className = 'invalid';
                     } else {
                         className = 'valid';

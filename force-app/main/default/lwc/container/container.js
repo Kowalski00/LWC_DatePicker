@@ -4,8 +4,12 @@ export default class Container extends LightningElement {
 
     @track dateContext = new Date();
     @track minDate = new Date();
+    @track maxDate = new Date();
     @track dateSelected;
 
+    connectedCallback() {
+        this.maxDate.setDate(this.maxDate.getDate() + 7);
+    }
 
     handleChangeDate(event) {
 
